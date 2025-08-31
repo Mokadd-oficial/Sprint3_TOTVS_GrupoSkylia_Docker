@@ -46,12 +46,7 @@ cd Sprint3_TOTVS_GrupoSkylia_Docker\Sprint3_TOTVS_GrupoSkylia\containers\etl-pyt
 
 #✅ Como rodar o projeto
 
-Subir os containers (SQL Server + ETL):
-
-docker-compose up --build
-
-
-Para rodar em segundo plano (detached mode):
+Subir os containers em 2o plano (SQL Server + ETL):
 
 docker-compose up -d --build
 
@@ -74,9 +69,8 @@ O ETL será executado automaticamente, lendo ticket_totvs.csv e gravando no banc
 
 O container SQL Server já vem com a ferramenta sqlcmd disponível.
 
-Entrar no container do banco:
-
-docker exec -it sqlserver_local /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Senha123!"
+# acessar o SQL Server dentro do container
+docker exec -it sqlserver_local /opt/mssql-tools/bin/sqlcmd -S localhost -U $SQL_USER -P $SQL_PASSWORD
 
 
 Dentro do sqlcmd, selecionar o banco e consultar:
