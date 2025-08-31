@@ -42,7 +42,7 @@ No terminal:
 
 ```bash
 git clone https://github.com/Mokadd-oficial/Sprint3_TOTVS_GrupoSkylia_Docker.git
-cd Sprint3_TOTVS_GrupoSkylia/containers/etl-python
+cd Sprint3_TOTVS_GrupoSkylia_Docker\Sprint3_TOTVS_GrupoSkylia\containers\etl-python>
 
 #✅ Como rodar o projeto
 
