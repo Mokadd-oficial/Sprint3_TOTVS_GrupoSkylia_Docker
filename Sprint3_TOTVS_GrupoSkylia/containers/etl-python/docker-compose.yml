@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver_local
+    environment:
+      SA_PASSWORD: "Senha123!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - etl-net
+
+  etl:
+    build: .
+    container_name: etl_app
+    depends_on:
+      - db
+    environment:
+      CSV_PATH: /app/data/ticket_totvs.csv
+      SQL_SERVER_FQDN: db
+      SQL_DB_NAME: DB_GrupoSkylia
+      SQL_USER: sa
+      SQL_PASSWORD: "Senha123!"
+    volumes:
+      - ../../data-samples:/app/data
+    networks:
+      - etl-net
+
+networks:
+  etl-net:
+    driver: bridge
