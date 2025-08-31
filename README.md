@@ -52,8 +52,14 @@ SQL_PASSWORD= Nota100paraSkylia#100
 Como acessar o banco
 Entrar no container do SQL Server usando sqlcmd, é um container apenas para o sqlcmd
 
-docker run -it --rm --env-file .env mcr.microsoft.com/mssql-tools `
-  /opt/mssql-tools/bin/sqlcmd -S host.docker.internal,1433 -U %SQL_USER% -P %SQL_PASSWORD%
+$envVars = Get-Content .env | ForEach-Object {
+    $name, $value = $_ -split "="
+    [System.Environment]::SetEnvironmentVariable($name.Trim(), $value.Trim())
+}
+
+docker run -it --rm mcr.microsoft.com/mssql-tools `
+  /opt/mssql-tools/bin/sqlcmd -S host.docker.internal,1433 -U $env:SQL_USER -P $env:SQL_PASSWORD
+
 
 
 Dentro do sqlcmd, selecionar o banco e consultar:
